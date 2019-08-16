@@ -58,9 +58,11 @@
     width: 6px;
     height: 14px;
     position: absolute;
+    user-select: none;
 }
 .enemy{
     position: absolute;
+    user-select: none;
 }
 #score{
     height: 40px;
