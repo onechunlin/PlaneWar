@@ -36,50 +36,45 @@ window.onload = function(){
     gameStart.firstElementChild.onclick = function(){
         gameStart.style.display = "none";
         gameEnter.style.display = "block";
-        //给当前文档添加键盘事件
-        document.onkeyup = function(e){
-            let event = e || window.event;
-            //按下空格键
-            if(event.keyCode == 32){
-                if(!gameStatus){
-                    if(gameOver){
-                        //初始化
-                        score = 0;
-                        gameOver = false;
-                    }
-                    gameStatus = true;
-                    game.onmousemove = myPlaneMove;
-                    //背景图的运动
-                    bgMove();
-                    //创建子弹
-                    shot();
-                    //创建敌机
-                    appearEnemys();
-                    //暂停游戏之后的开始游戏
-                    //子弹的继续运动
-                    if(nowBullet.length > 0){
-                        restart(nowBullet,1);
-                    }
-                    //敌机的继续运动
-                    if(nowEnemy.length > 0){
-                        restart(nowEnemy);
-                    }
-                    
-                }else{
-                    gameStatus = false;
-                    game.onmousemove = null;
-                    //清除创建子弹的定时器
-                    clearInterval(createBulletsTimer);
-                    createBulletsTimer = null;
-                    //清除创建敌机的定时器
-                    clearInterval(createEnemysTimer);
-                    createEnemysTimer = null;
-                    //清除背景移动的定时器
-                    clearInterval(bgMoveTimer);
-                    bgMoveTimer = null;
-                    //清除所有子弹和敌机的运动定时器
-                    clearTimer(nowBullet.concat(nowEnemy));
+        document.ondblclick = function(){
+            if(!gameStatus){
+                if(gameOver){
+                    //初始化
+                    score = 0;
+                    gameOver = false;
                 }
+                gameStatus = true;
+                game.onmousemove = myPlaneMove;
+                //背景图的运动
+                bgMove();
+                //创建子弹
+                shot();
+                //创建敌机
+                appearEnemys();
+                //暂停游戏之后的开始游戏
+                //子弹的继续运动
+                if(nowBullet.length > 0){
+                    restart(nowBullet,1);
+                }
+                //敌机的继续运动
+                if(nowEnemy.length > 0){
+                    restart(nowEnemy);
+                }
+
+            }else{
+                gameStatus = false;
+                game.onmousemove = null;
+                //清除创建子弹的定时器
+                clearInterval(createBulletsTimer);
+                createBulletsTimer = null;
+                //清除创建敌机的定时器
+                clearInterval(createEnemysTimer);
+                createEnemysTimer = null;
+                //清除背景移动的定时器
+                clearInterval(bgMoveTimer);
+                bgMoveTimer = null;
+                //清除所有子弹和敌机的运动定时器
+                clearTimer(nowBullet.concat(nowEnemy));
             }
         }
     }
